@@ -8,7 +8,7 @@ using MyProject.DataAccess.Models;
 
 namespace MyProject.WebAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DataController : ControllerBase
