@@ -10,10 +10,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NLog" Version="4.7.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MyProject.Contracts\MyProject.Contracts.csproj" />
+    <ProjectReference Include="..\MyProject.LoggerService\MyProject.LoggerService.csproj" />
     <ProjectReference Include="..\MyProject.Security\MyProject.Security.csproj" />
     <ProjectReference Include="..\Repository\MyProject.Repository.csproj" />
   </ItemGroup>
