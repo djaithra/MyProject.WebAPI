@@ -6,14 +6,12 @@ using System.Text;
 
 namespace MyProject.Entities
 {
-    public class AppDbContext:DbContext
+    public class RepositoryContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            :base(options)
+        public RepositoryContext(DbContextOptions options)
+            : base(options)
         {
-                
-        }
-
+        }       
         public DbSet<Employee> Employees { get; set; }
     }
 }

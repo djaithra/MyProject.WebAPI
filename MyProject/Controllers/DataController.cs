@@ -4,27 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyProject.DataAccess.Models;
+using MyProject.Contracts;
+using MyProject.Entities.Models;
 
 namespace MyProject.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DataController : ControllerBase
     {
-        public DataController(IEmployeeRepository employeeRepository)
+        public DataController(IRepositoryWrapper repositoryWrapper)
         {
-            EmployeeRepository = employeeRepository;
+            RepositoryWrapper = repositoryWrapper;
         }
 
-        public IEmployeeRepository EmployeeRepository { get; }
+        public IRepositoryWrapper RepositoryWrapper { get; }
 
         // GET: api/<DataController>
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
-            return EmployeeRepository.GetAllEmployee(); 
+            return RepositoryWrapper.Employee.FindAll();
+            //return new[] { "value1", "value2"};// EmployeeRepository.GetAllEmployee(); 
         }       
     }
 }

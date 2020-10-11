@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MyProject.DataAccess;
+using MyProject.Entities;
 
-namespace MyProject.DataAccess.Migrations
+namespace MyProject.Entities.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20201009150009_InitialMigration")]

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyProject.DataAccess.Models
+namespace MyProject.Entities.Models
 {
     public class Employee
     {

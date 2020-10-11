@@ -4,8 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using MyProject.DataAccess;
-using MyProject.DataAccess.Models;
+using MyProject.Contracts;
+using MyProject.Entities;
+using MyProject.Entities.Models;
+using MyProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,10 +40,10 @@ namespace MyProject.WebAPI
 
         public static void ConfigureSqlServerContext(this IServiceCollection services, IConfiguration _config)
         {
-            services.AddDbContextPool<AppDbContext>(
+            services.AddDbContextPool<RepositoryContext>(
             Options => Options.UseSqlServer(_config.GetConnectionString("MyProjectConnection")));
 
-            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+            services.AddScoped<IRepositoryWrapper, RepositoryWarpper>();
         }
     }
 }

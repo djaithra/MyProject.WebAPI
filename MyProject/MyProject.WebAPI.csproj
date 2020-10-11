@@ -13,8 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MyProject.DataAccess\MyProject.DataAccess.csproj" />
+    <ProjectReference Include="..\MyProject.Contracts\MyProject.Contracts.csproj" />
+    <ProjectReference Include="..\MyProject.DataAccess\MyProject.Entities.csproj" />
     <ProjectReference Include="..\MyProject.Security\MyProject.Security.csproj" />
+    <ProjectReference Include="..\Repository\MyProject.Repository.csproj" />
   </ItemGroup>
 
 
