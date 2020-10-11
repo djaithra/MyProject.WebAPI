@@ -26,7 +26,7 @@ namespace MyProject.WebAPI.Controllers
         public IEnumerable<Employee> Get()
         {
             return RepositoryWrapper.Employee.FindAll();
-            //return new[] { "value1", "value2"};// EmployeeRepository.GetAllEmployee(); 
+            //return RepositoryWrapper.Employee.FindByCondition(x => x.Id.Equals(2));            
         }       
     }
 }

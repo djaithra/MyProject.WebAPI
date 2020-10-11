@@ -11,7 +11,7 @@ namespace MyProject.Entities
         public RepositoryContext(DbContextOptions options)
             : base(options)
         {
-        }       
+        }
         public DbSet<Employee> Employees { get; set; }
     }
 }

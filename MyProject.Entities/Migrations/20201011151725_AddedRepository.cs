@@ -2,7 +2,7 @@
 
 namespace MyProject.Entities.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class AddedRepository : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

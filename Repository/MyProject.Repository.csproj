@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyProject.Contracts\MyProject.Contracts.csproj" />
-    <ProjectReference Include="..\MyProject.DataAccess\MyProject.Entities.csproj" />
+    <ProjectReference Include="..\MyProject.Entities\MyProject.Entities.csproj" />
   </ItemGroup>
 
 </Project>
