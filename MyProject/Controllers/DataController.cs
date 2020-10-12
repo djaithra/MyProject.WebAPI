@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyProject.Contracts;
 using MyProject.Entities.Models;
+using Newtonsoft.Json;
 
 namespace MyProject.WebAPI.Controllers
 {
@@ -25,23 +26,46 @@ namespace MyProject.WebAPI.Controllers
         private readonly ILoggerManager _logger;
 
         // GET: api/<DataController>
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    //Testing Logging
+
+        //    //_logger.LogInfo("Here is info message from the controller.");
+        //    //_logger.LogDebug("Here is debug message from the controller.");
+        //    //_logger.LogWarn("Here is warn message from the controller.");
+        //    //_logger.LogError("Here is error message from the controller.");
+
+        //    //Testing Global Exceptions
+        //    //_logger.LogInfo("Fetching all the Emlployees from the storage");           
+        //    //throw new Exception("Exception while fetching all the students from the storage.");           
+
+        //    //Getting Data
+        //    var employees= RepositoryWrapper.Employee.FindAll();
+        //    return Ok(employees);
+        //    //return RepositoryWrapper.Employee.FindByCondition(x => x.Id.Equals(2));            
+
+        //}
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public IActionResult GetEmployees([FromQuery] EmployeeParameters employeeParameters)
         {
-            //Testing Logging
+            var employees = RepositoryWrapper.Employee.GetEmployees(employeeParameters);
 
-            //_logger.LogInfo("Here is info message from the controller.");
-            //_logger.LogDebug("Here is debug message from the controller.");
-            //_logger.LogWarn("Here is warn message from the controller.");
-            //_logger.LogError("Here is error message from the controller.");
+            var metadata = new
+            {
+                employees.TotalCount,
+                employees.PageSize,
+                employees.CurrentPage,
+                employees.TotalPages,
+                employees.HasNext,
+                employees.HasPrevious
+            };
 
-            //Testing Global Exceptions
-            //_logger.LogInfo("Fetching all the Emlployees from the storage");           
-            //throw new Exception("Exception while fetching all the students from the storage.");           
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
-            //Getting Data
-            return RepositoryWrapper.Employee.FindAll();
-            //return RepositoryWrapper.Employee.FindByCondition(x => x.Id.Equals(2));            
-        }       
+            _logger.LogInfo($"Returned {employees.TotalCount} owners from database.");
+
+            return Ok(employees);
+        }
     }
 }
