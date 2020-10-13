@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -40,7 +41,7 @@ namespace MyProject
             services.AddControllers();
             services.ConfigureAuthentication(key);
             services.ConfigureSqlServerContext(Configuration);
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));           
             //services.AddSingleton<IJwtAuthenticationManager,JwtAuthenticationManager>();
             services.AddSingleton<ITokenManager,TokenManager>();

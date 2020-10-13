@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyProject.Contracts;
+using MyProject.Entities.DataTransferObjects;
 using MyProject.Entities.Models;
 using Newtonsoft.Json;
 
@@ -15,15 +17,17 @@ namespace MyProject.WebAPI.Controllers
     [ApiController]
     public class DataController : ControllerBase
     {
-        public DataController(IRepositoryWrapper repositoryWrapper,ILoggerManager logger)
+        public DataController(IRepositoryWrapper repositoryWrapper,ILoggerManager logger,IMapper mapper)
         {
             RepositoryWrapper = repositoryWrapper;
             _logger = logger;
+            this._mapper = mapper;
         }
 
         public IRepositoryWrapper RepositoryWrapper { get; }
 
         private readonly ILoggerManager _logger;
+        private readonly IMapper _mapper;
 
         // GET: api/<DataController>
         //[HttpGet]
@@ -62,10 +66,10 @@ namespace MyProject.WebAPI.Controllers
             };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-
+            var employeeResult = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
             _logger.LogInfo($"Returned {employees.TotalCount} owners from database.");
 
-            return Ok(employees);
+            return Ok(employeeResult);
         }
     }
 }
