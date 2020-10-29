@@ -29,6 +29,12 @@ namespace MyProject.WebAPI.Controllers
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(new[]{"value1","value2" });                   
+        }
+
         // GET: api/<DataController>
         //[HttpGet]
         //public IActionResult Get()
@@ -50,26 +56,26 @@ namespace MyProject.WebAPI.Controllers
         //    //return RepositoryWrapper.Employee.FindByCondition(x => x.Id.Equals(2));            
 
         //}
-        [HttpGet]
-        public IActionResult GetEmployees([FromQuery] EmployeeParameters employeeParameters)
-        {
-            var employees = RepositoryWrapper.Employee.GetEmployees(employeeParameters);
+        //[HttpGet]
+        //public IActionResult GetEmployees([FromQuery] EmployeeParameters employeeParameters)
+        //{
+        //    var employees = RepositoryWrapper.Employee.GetEmployees(employeeParameters);
 
-            var metadata = new
-            {
-                employees.TotalCount,
-                employees.PageSize,
-                employees.CurrentPage,
-                employees.TotalPages,
-                employees.HasNext,
-                employees.HasPrevious
-            };
+        //    var metadata = new
+        //    {
+        //        employees.TotalCount,
+        //        employees.PageSize,
+        //        employees.CurrentPage,
+        //        employees.TotalPages,
+        //        employees.HasNext,
+        //        employees.HasPrevious
+        //    };
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-            var employeeResult = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
-            _logger.LogInfo($"Returned {employees.TotalCount} owners from database.");
+        //    Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+        //    var employeeResult = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
+        //    _logger.LogInfo($"Returned {employees.TotalCount} owners from database.");
 
-            return Ok(employeeResult);
-        }
+        //    return Ok(employeeResult);
+        //}
     }
 }

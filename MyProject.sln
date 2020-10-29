@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyProject.Contracts", "MyPr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyProject.Entities", "MyProject.Entities\MyProject.Entities.csproj", "{C6B2DE8E-4D5F-41A6-86C3-D34E2A0FFE1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProject.LoggerService", "MyProject.LoggerService\MyProject.LoggerService.csproj", "{BAD317F5-AC43-4EBD-83A2-0B0AC1B35FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyProject.LoggerService", "MyProject.LoggerService\MyProject.LoggerService.csproj", "{BAD317F5-AC43-4EBD-83A2-0B0AC1B35FAC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyProject.Repository", "MyProject.Repository\MyProject.Repository.csproj", "{6862C5E9-7330-4D63-A6D2-0CB3BBE4B16A}"
 EndProject
