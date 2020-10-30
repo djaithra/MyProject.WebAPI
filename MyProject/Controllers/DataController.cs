@@ -32,7 +32,7 @@ namespace MyProject.WebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(new[] { "value1", "value2" });
+            return Ok(new[] { "value1", "value2", "value3"});
         }
 
         // GET: api/<DataController>
