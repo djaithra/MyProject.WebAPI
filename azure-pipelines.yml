@@ -47,5 +47,5 @@ steps:
     SqlPassword: 'wipro@123'
     deployType: 'DacpacTask'
     DeploymentAction: 'Publish'
-    DacpacFile: 'migration.sql'
+    DacpacFile: '*.sql'
     IpDetectionMethod: 'AutoDetect'
