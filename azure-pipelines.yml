@@ -37,15 +37,3 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-- task: SqlAzureDacpacDeployment@1
-  inputs:
-    azureSubscription: 'SvcCon'
-    AuthenticationType: 'server'
-    ServerName: 'dsdatabase.database.windows.net'
-    DatabaseName: 'MyProjectDB'
-    SqlUsername: 'dharmesh'
-    SqlPassword: 'wipro@123'
-    deployType: 'DacpacTask'
-    DeploymentAction: 'Publish'
-    DacpacFile: '$(System.ArtifactStagingDirectory)/**/*.sql'
-    IpDetectionMethod: 'AutoDetect'
