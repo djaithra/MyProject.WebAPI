@@ -28,10 +28,15 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
+  displayName: 'Initialize EntityFrameworkCore'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: custom
+    custom: tool
+    arguments: 'install --global dotnet-ef'
+- task: CmdLine@2
+  inputs:
+    script: 'dotnet ef migrations script –p $(Build.SourcesDirectory)\MyProject.Entities\MyProject.Entities.csproj  -o $(build.artifactstagingdirectory)\migrations\scripts.sql –i'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
