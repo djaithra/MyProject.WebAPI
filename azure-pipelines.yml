@@ -34,24 +34,9 @@ steps:
     command: custom
     custom: tool
     arguments: 'install --global dotnet-ef'
-- task: DotNetCoreCLI@2
-  displayName: 'Create migration'
+- task: CmdLine@2
   inputs:
-    command: custom
-    custom: ef
-    arguments: 'migrations script -i -o migration.sql' 
-- task: SqlAzureDacpacDeployment@1
-  inputs:
-    azureSubscription: 'Free Trial (9706ec23-5700-4e0e-93b0-3d46b090af3e)'
-    AuthenticationType: 'server'
-    ServerName: 'dsdataapp.database.windows.net'
-    DatabaseName: 'MyProjectDB'
-    SqlUsername: 'dharmesh'
-    SqlPassword: 'wipro@123'
-    deployType: 'SqlTask'
-    SqlFile: 'migration'
-    IpDetectionMethod: 'AutoDetect'
-
+    script: 'dotnet ef migrations script –p $(build.sourcesdirectory)\MyProject.Entities.csproj  -o $(build.artifactstagingdirectory)\migrations\scripts.sql –i'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
