@@ -1,6 +1,6 @@
 # ASP.NET Core (.NET Framework)
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more1:
+# Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
@@ -28,10 +28,30 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
+  displayName: 'Initialize EntityFrameworkCore'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: custom
+    custom: tool
+    arguments: 'install --global dotnet-ef'
+- task: DotNetCoreCLI@2
+  displayName: 'Create migration'
+  inputs:
+    command: custom
+    custom: ef
+    arguments: 'migrations script -i -o migration.sql' 
+- task: SqlAzureDacpacDeployment@1
+  inputs:
+    azureSubscription: 'Free Trial (9706ec23-5700-4e0e-93b0-3d46b090af3e)'
+    AuthenticationType: 'server'
+    ServerName: 'dsdataapp.database.windows.net'
+    DatabaseName: 'MyProjectDB'
+    SqlUsername: 'dharmesh'
+    SqlPassword: 'wipro@123'
+    deployType: 'SqlTask'
+    SqlFile: 'migration'
+    IpDetectionMethod: 'AutoDetect'
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
