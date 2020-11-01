@@ -37,7 +37,7 @@ steps:
   inputs:
     command: custom
     custom: ef
-    arguments: 'migrations script -i -o migration.sql'
+    arguments: 'migrations script -i –p $(Build.SourcesDirectory)\MyProject.Entities\MyProject.Entities.csproj -o migration.sql'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
