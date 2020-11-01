@@ -35,7 +35,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'dotnet ef migrations script -o $(Build.ArtifactStagingDirectory)\migrations\scripts.sql –i'
+    script: 'dotnet-ef migrations script -o $(Build.ArtifactStagingDirectory)\migrations\scripts.sql –i'
     workingDirectory: '$(Build.SourcesDirectory)\MyProject.Entities'
 
 - task: PublishBuildArtifacts@1
