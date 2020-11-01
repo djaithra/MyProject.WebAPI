@@ -32,12 +32,14 @@ steps:
     command: custom
     custom: tool
     arguments: 'install --global dotnet-ef'
+
 - task: DotNetCoreCLI@2
   displayName: 'Create migration'
   inputs:
     command: custom
-    custom: ef
-    arguments: 'migrations script -i –p $(Build.SourcesDirectory)\MyProject.Entities\MyProject.Entities.csproj -o migration.sql'
+    custom: ef migrations script
+    projects: '**/MyProject.Entities.csproj'
+    arguments: '-o migration.sql -i'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
