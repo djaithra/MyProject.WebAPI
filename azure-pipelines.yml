@@ -20,13 +20,6 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Initialize EntityFrameworkCore'
-  inputs:
-    command: custom
-    custom: tool
-    arguments: 'install --global dotnet-ef'
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
