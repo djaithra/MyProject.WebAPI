@@ -36,10 +36,10 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Create migration'
   inputs:
-    command: custom
-    custom: ef migrations script
+    command: 'custom'
     projects: '**/MyProject.Entities.csproj'
-    arguments: '-o migration.sql -i'
+    custom: 'ef'
+    arguments: 'migrations script -i -o migration.sql'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
