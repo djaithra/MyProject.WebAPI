@@ -38,8 +38,8 @@ steps:
   inputs:
     command: 'custom'
     projects: '**/MyProject.Entities.csproj'
-    custom: 'ef'
-    arguments: 'migrations script -i -o migration.sql'
+    custom: 'ef migrations script'
+    arguments: '-i -o migration.sql'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
