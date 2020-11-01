@@ -20,14 +20,12 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
-
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
 - task: DotNetCoreCLI@2
   displayName: 'Initialize EntityFrameworkCore'
   inputs:
@@ -35,8 +33,10 @@ steps:
     custom: tool
     arguments: 'install --global dotnet-ef'
 - task: CmdLine@2
+  displayName: 'Create migration'
   inputs:
-    script: 'dotnet ef migrations script –p $(Build.SourcesDirectory)\MyProject.Entities\MyProject.Entities.csproj -o $(build.artifactstagingdirectory)\migrations\scripts.sql –i'
+    script: 'dotnet-ef migrations script -i -o $(Build.ArtifactStagingDirectory)\migrations\scripts.sql'
+    workingDirectory: '$(Build.SourcesDirectory)/MyProject'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
